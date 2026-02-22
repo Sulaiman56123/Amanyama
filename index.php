@@ -1,3 +1,16 @@
+<?php
+// เชื่อมต่อ MariaDB (ข้อมูลจากหน้าจอดำของคุณ)
+$conn = new mysqli(”localhost“, ”root“, ”รหัสผ่าน“, ”6023“);
+
+// ตรวจสอบการเชื่อมต่อ
+if ($conn->connect_error) { die(”Connection failed: “ . $conn->connect_error); }
+
+// เมื่อมีการส่งข้อมูลจากฟอร์มให้บันทึกลง Table
+if ($_SERVER[”REQUEST_METHOD“] == ”POST“) {
+    $node_val = $_POST[’node_value‘]; 
+    $conn->query(”INSERT INTO tree_nodes (value) VALUES (’$node_val‘)“);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -256,4 +269,5 @@
     </script>
 </body>
 </html>
+
 
